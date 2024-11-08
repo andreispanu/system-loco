@@ -15,7 +15,7 @@ const ReusableSearchField = ({
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   return (
-    <SearchFieldContainer>
+    <SearchFieldContainer data-testid="reusable-search-field-container">
       <StyledSearchField
         label={label}
         variant="outlined"

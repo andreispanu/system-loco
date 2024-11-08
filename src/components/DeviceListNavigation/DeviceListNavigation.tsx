@@ -19,7 +19,7 @@ const DeviceListNavigation: React.FC = () => {
   const isXlUp = useMediaQuery(theme.breakpoints.up("xl"));
 
   return (
-    <Box>
+    <Box data-testid="reusable-navigation-container">
       <Paper
         elevation={0}
         sx={{ borderRadius: 2, padding: isXlUp ? 1.2 : 1, backgroundColor: "#f8f9fa" }}

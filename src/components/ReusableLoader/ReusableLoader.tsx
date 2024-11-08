@@ -5,7 +5,7 @@ import theme from "../../theme";
 
 const ReusableLoader = () => {
   return (
-    <Container>
+    <Container data-testid="reusable-loader-container">
       <Grid container p={theme.spacing(6)}>
         <Grid size={{ xs: 12 }}>
           <Box
