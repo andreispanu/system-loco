@@ -9,10 +9,7 @@ export const customColors = {
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#fbc02d',
-    },
-    secondary: {
-      main: '#616161',
+      main: '#000',
     },
   },
   typography: {

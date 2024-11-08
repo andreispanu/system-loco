@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { TablePagination, CircularProgress } from "@mui/material";
+import {
+  TablePagination,
+  Typography,
+} from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import DeviceTable from "../../components/DeviceTable";
 import ReusableSearchField from "../../components/ReusableSearchField";
 import theme from "../../theme";
 import DeviceListNavigation from "../../components/DeviceListNavigation";
+import ReusableLoader from "../../components/ReusableLoader";
 
 const fetchDevices = async () => {
   const response = await fetch(
@@ -182,8 +186,7 @@ const ReusableTable: React.FC = () => {
     }
   }, [filteredData.length, page, rowsPerPage]);
 
-  if (isLoading) return <CircularProgress />;
-  if (error instanceof Error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <ReusableLoader />;
 
   const handleRowClick = (deviceId: string) => {
     navigate(`/device/${deviceId}`);
@@ -198,7 +201,13 @@ const ReusableTable: React.FC = () => {
     setPage(0);
   };
 
-  return (
+  return error ? (
+    <>
+      <Typography color="error" sx={{ mt: 4, textAlign: "center" }}>
+        Error loading data. Please try again later.
+      </Typography>
+    </>
+  ) : (
     <Grid container>
       <Grid size={{ xs: 12, md: 2 }} p={theme.spacing(2)}>
         <DeviceListNavigation />

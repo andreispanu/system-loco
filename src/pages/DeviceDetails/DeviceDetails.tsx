@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { CircularProgress, Typography, Box, Tabs, Tab } from "@mui/material";
+import { Typography, Box, Tabs, Tab, IconButton } from "@mui/material";
 import theme from "../../theme";
 import Grid from "@mui/material/Grid2";
 import { DetailsTitle, DetailsValue } from "./DeviceDetails.styles";
 import { formatDistanceToNow, format } from "date-fns";
 import Battery80Icon from "@mui/icons-material/Battery80";
 import ReusableMap from "../../components/ReusableMap";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ReusableLoader from "../../components/ReusableLoader";
 
 const fetchDeviceDetails = async (deviceId: string) => {
   const response = await fetch(
@@ -22,6 +24,7 @@ const fetchDeviceDetails = async (deviceId: string) => {
 const DeviceDetails: React.FC = () => {
   const { deviceId } = useParams<{ deviceId: string }>();
   const [tabValue, setTabValue] = useState(0);
+  const navigate = useNavigate();
 
   const {
     data: deviceData,
@@ -30,18 +33,57 @@ const DeviceDetails: React.FC = () => {
   } = useQuery({
     queryKey: ["deviceDetails", deviceId],
     queryFn: () => fetchDeviceDetails(deviceId!),
-    enabled: !!deviceId, // Only fetch if deviceId is available
+    enabled: !!deviceId,
   });
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
-  if (isLoading) return <CircularProgress />;
-  if (error instanceof Error) return <div>Error: {error.message}</div>;
+  const handleBackClick = () => {
+    navigate(-1);
+  };
 
-  return (
+  if (isLoading) return <ReusableLoader />;
+
+  return error ? (
+    <>
+      <Typography color="error" sx={{ mt: 4, textAlign: "center" }}>
+        Error loading data. Please try again later.
+        <br/>
+        <IconButton
+          onClick={handleBackClick}
+          sx={{
+            height: "20px",
+            width: "20px",
+            marginRight: "5px",
+            padding: theme.spacing(2),
+          }}
+        >
+          <ArrowBackIcon />
+        </IconButton>
+        Navigate Back
+      </Typography>
+    </>
+  ) : (
     <Box sx={{ p: theme.spacing(3) }}>
+      <Box>
+        <Typography variant="body2">
+          <IconButton
+            onClick={handleBackClick}
+            sx={{
+              height: "20px",
+              width: "20px",
+              marginRight: "5px",
+              padding: theme.spacing(2),
+            }}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+          Back
+        </Typography>
+      </Box>
+
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={tabValue}
