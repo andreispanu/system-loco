@@ -60,6 +60,7 @@ const DeviceList: React.FC = () => {
     <>
       <Typography color="error" sx={{ mt: 4, textAlign: "center" }}>
         Error loading data. Please try again later.
+        <br/>{error.message}
       </Typography>
     </>
   ) : (
