@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid2";
 import { DetailsTitle, DetailsValue } from "./DeviceDetails.styles";
 import { formatDistanceToNow, format } from "date-fns";
 import Battery80Icon from "@mui/icons-material/Battery80";
+import ReusableMap from "../../components/ReusableMap";
 
 const fetchDeviceDetails = async (deviceId: string) => {
   const response = await fetch(
@@ -41,8 +42,6 @@ const DeviceDetails: React.FC = () => {
 
   return (
     <Box sx={{ p: theme.spacing(3) }}>
-      
-
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs
           value={tabValue}
@@ -88,7 +87,14 @@ const DeviceDetails: React.FC = () => {
                 <DetailsTitle>Battery</DetailsTitle>
 
                 <DetailsValue>
-                  <Battery80Icon sx={{width: '15px', height: '15px', top: '3px', position: 'relative'}} />
+                  <Battery80Icon
+                    sx={{
+                      width: "15px",
+                      height: "15px",
+                      top: "3px",
+                      position: "relative",
+                    }}
+                  />
                   {deviceData?.statusIndicators?.battery || "N/A"}
                 </DetailsValue>
 
@@ -112,18 +118,11 @@ const DeviceDetails: React.FC = () => {
           <Grid size={{ xs: 12, lg: 4 }}>
             <Typography variant="h6">Position</Typography>
 
-            <Box
-              sx={{
-                width: "100%",
-                height: "200px",
-                backgroundColor: "#e0e0e0",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <DetailsValue>Google Maps Placeholder</DetailsValue>
-            </Box>
+            <ReusableMap
+              lat={deviceData?.lastKnownLocation?.global?.lat}
+              lon={deviceData?.lastKnownLocation?.global?.lon}
+            />
+
             <Typography
               variant="body1"
               fontWeight={theme.typography.fontWeightMedium}
