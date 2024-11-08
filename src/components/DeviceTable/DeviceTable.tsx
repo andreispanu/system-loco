@@ -1,4 +1,3 @@
-// src/components/DeviceTable.tsx
 import React from "react";
 import {
   Table,
@@ -18,7 +17,7 @@ import { StyledHeaderCell, StyledTableCell } from "./DeviceTable.styles";
 import theme, { customColors } from "../../theme";
 import { DeviceTableProps } from "./DeviceTable.types";
 
-const DeviceTable: React.FC<DeviceTableProps> = ({
+const DeviceList: React.FC<DeviceTableProps> = ({
   devices,
   page,
   rowsPerPage,
@@ -29,7 +28,7 @@ const DeviceTable: React.FC<DeviceTableProps> = ({
     return icons[Math.floor(Math.random() * icons.length)];
   };
 
-  const isGreenStatus = Math.random() < 0.4;
+  const isGreenStatus = Math.random() < 0.5;
 
   return (
     <TableContainer>
@@ -111,4 +110,4 @@ const DeviceTable: React.FC<DeviceTableProps> = ({
   );
 };
 
-export default DeviceTable;
+export default DeviceList;

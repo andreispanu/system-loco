@@ -22,7 +22,7 @@ const DeviceListNavigation: React.FC = () => {
     <Box>
       <Paper
         elevation={0}
-        sx={{ borderRadius: 2, padding: isXlUp ? 2 : 1, backgroundColor: "#f8f9fa" }}
+        sx={{ borderRadius: 2, padding: isXlUp ? 1.2 : 1, backgroundColor: "#f8f9fa" }}
       >
         <List>
           <ListItemButton
@@ -30,7 +30,7 @@ const DeviceListNavigation: React.FC = () => {
               backgroundColor: "#fff3cd",
               borderRadius: 1,
               mb: 1,
-              padding: isXlUp ? "16px" : "8px",
+              padding: isXlUp ? theme.spacing(1.5) : theme.spacing(0.8),
             }}
           >
             {isXlUp && (
@@ -50,7 +50,7 @@ const DeviceListNavigation: React.FC = () => {
           <ListItemButton
             sx={{
               mb: 1,
-              padding: isXlUp ? "16px" : "8px",
+              padding: isXlUp ? theme.spacing(1.5): theme.spacing(0.8),
             }}
           >
             {isXlUp && (
@@ -69,7 +69,7 @@ const DeviceListNavigation: React.FC = () => {
 
           <ListItemButton
             sx={{
-              padding: isXlUp ? "16px" : "8px",
+              padding: isXlUp ? theme.spacing(1.5) : theme.spacing(0.8),
             }}
           >
             {isXlUp && (

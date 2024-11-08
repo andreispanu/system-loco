@@ -5,6 +5,7 @@ import {
   SearchFieldContainer,
   StyledSearchField,
 } from "./ReusableSearchField.styles";
+import theme from "../../theme";
 
 const ReusableSearchField = ({
   label,
@@ -27,9 +28,9 @@ const ReusableSearchField = ({
             </InputAdornment>
           ),
           sx: {
-            borderRadius: 4, // Rounded corners
-            backgroundColor: "#f5f5f5", // Grey background
-            border: "none", // Remove outline
+            borderRadius: 8, 
+            backgroundColor: theme.palette.grey[100], 
+            border: "none", 
           },
         }}
       />
